@@ -292,7 +292,10 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
         case eORIENTATION_FUNC:
         {
             /*Init is called when detach happens*/
-            UPDPIO_Disable(u8PortNum, eUPD_PIO2);
+            //UPDPIO_Disable(u8PortNum, eUPD_PIO2);
+            PORT_PinGPIOConfig(PORT_PIN_PA28);           
+            PORT_PinSet(PORT_PIN_PA28);
+            PORT_PinOutputEnable(PORT_PIN_PA28);
             break;
         }
 		
@@ -424,15 +427,21 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
         {
             if (eGPIO_ASSERT == eGPIODrive)
             {
-                UPDPIO_SetBufferType(u8PortNum, eUPD_PIO2,UPD_PIO_SETBUF_PUSHPULL);
-                UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
-                UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
+                //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO2,UPD_PIO_SETBUF_PUSHPULL);
+                //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
+                //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
+                PORT_PinGPIOConfig(PORT_PIN_PA28);           
+                PORT_PinSet(PORT_PIN_PA28);
+                PORT_PinOutputEnable(PORT_PIN_PA28);
             }
             else
             {
-                UPDPIO_SetBufferType(u8PortNum,eUPD_PIO2,UPD_PIO_SETBUF_PUSHPULL);
-                UPDPIO_DriveLow(u8PortNum, eUPD_PIO2); 
-                UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
+                //UPDPIO_SetBufferType(u8PortNum,eUPD_PIO2,UPD_PIO_SETBUF_PUSHPULL);
+                //UPDPIO_DriveLow(u8PortNum, eUPD_PIO2); 
+                //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
+                PORT_PinGPIOConfig(PORT_PIN_PA28);              
+                PORT_PinClear(PORT_PIN_PA28);
+                PORT_PinOutputEnable(PORT_PIN_PA28);
             }
             break;  
         }
