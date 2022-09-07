@@ -34,19 +34,19 @@ HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define _PSF_BOOTCFG_H
 
 /*********************************Common Configuration*****************************************/
-#define CFG_PRODUCT_ID              0x350U
-#define CFG_VENDOR_ID               0x424U
-#define CFG_HW_VERSION              0x0U
+#define CFG_PRODUCT_ID              0x1234U
+#define CFG_VENDOR_ID               0x451U
+#define CFG_HW_VERSION              0x5U
 #define CFG_SILICON_VERSION         0x0U
 
 /*Length of Manufacturer string should be within the range of 0 to 21.
  Default length of Manufacturer string is 20*/
-#define CFG_MANUFACTURER_STR_LEN    20U
+#define CFG_MANUFACTURER_STR_LEN    18U
 
 /*Number of characters in Manufacturer string should be less than or equal to
  the value in CFG_MANUFACTURER_STR_LEN. Default manufacturer string is 
  "Microchip Technology" */
-#define CFG_MANUFACTURER_STR        "Microchip Technology"
+#define CFG_MANUFACTURER_STR        "Ramsey Electronics"
 
 /***********************************Port Specific configuration***********************/    
 
@@ -63,7 +63,7 @@ Rp Value (Bit 4:3) 0 -Rd(Sink), 1-Default USB Rp, 2- 1.5A Rp, 3-3.0A Rp
 Port Enable (Bit 5) 0- Port Disable; 1- Port Enable
 VCONN OCS Enable (Bit 9) 0- Disable, 1-Enable 
 Power Data State for FRS (Bit 12:11) 0 - FRS Disabled for Port, 1 - FRS only in Sink/Data Host, 2 - FRS only in Source/Data Device */
-#define CFG_PORT_0_CFG_DATA                  0x239U
+#define CFG_PORT_0_CFG_DATA                  0x23DU
 
 /********************************PIO Specific configuration******************************/
 #define CFG_PORT_0_UPD_FAULT_IN_PIO_NO       eUPD_PIO5
