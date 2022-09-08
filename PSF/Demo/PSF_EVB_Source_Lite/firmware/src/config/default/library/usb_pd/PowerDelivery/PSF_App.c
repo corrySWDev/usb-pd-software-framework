@@ -472,20 +472,27 @@ UINT8 App_PortPowerInit(UINT8 u8PortNum)
 
     
     /*VSEL0 Init */
-    UPDPIO_SetBufferType(u8PortNum, eUPD_PIO7, UPD_PIO_SETBUF_PUSHPULL);
-    UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
-    UPDPIO_EnableOutput(u8PortNum, eUPD_PIO7);
+    //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO7, UPD_PIO_SETBUF_PUSHPULL);
+    //UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
+    //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO7);
+    PORT_PinGPIOConfig(PORT_PIN_PA04);           
+    PORT_PinClear(PORT_PIN_PA04);
+    PORT_PinOutputEnable(PORT_PIN_PA04);
     
     /*VSEL 1 Init */
-    UPDPIO_SetBufferType(u8PortNum, eUPD_PIO8, UPD_PIO_SETBUF_PUSHPULL);
-    UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
-    UPDPIO_EnableOutput(u8PortNum, eUPD_PIO8);
-    
+    //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO8, UPD_PIO_SETBUF_PUSHPULL);
+    //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+    //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO8);
+    PORT_PinGPIOConfig(PORT_PIN_PA03);           
+    PORT_PinClear(PORT_PIN_PA03);
+    PORT_PinOutputEnable(PORT_PIN_PA03);    
     /*VSEL 2 Init */
-    UPDPIO_SetBufferType(u8PortNum, eUPD_PIO9, UPD_PIO_SETBUF_PUSHPULL);
-    UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
-    UPDPIO_EnableOutput(u8PortNum, eUPD_PIO9);
-    
+    //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO9, UPD_PIO_SETBUF_PUSHPULL);
+    //UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+    //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO9);
+    PORT_PinGPIOConfig(PORT_PIN_PA02);           
+    PORT_PinClear(PORT_PIN_PA02);
+    PORT_PinOutputEnable(PORT_PIN_PA02);   
  
     return u8Return; 
 }
@@ -509,34 +516,46 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
     {
         case APP_VOLTAGE_5000mV:
         {
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            PORT_PinClear(PORT_PIN_PA04);
+            PORT_PinClear(PORT_PIN_PA03);
+            PORT_PinClear(PORT_PIN_PA02);
             break;
         }
         case APP_VOLTAGE_9000mV:
         {
-            UPDPIO_DriveHigh(u8PortNum, eUPD_PIO7);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO7);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            PORT_PinSet(PORT_PIN_PA04);
+            PORT_PinClear(PORT_PIN_PA03);
+            PORT_PinClear(PORT_PIN_PA02);
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_VSEL0_STATUS;
             break;
         }
         case APP_VOLTAGE_15000mV:
         {
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
-            UPDPIO_DriveHigh(u8PortNum, eUPD_PIO8);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
+            //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO8);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            PORT_PinClear(PORT_PIN_PA04);
+            PORT_PinSet(PORT_PIN_PA03);
+            PORT_PinClear(PORT_PIN_PA02);
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_VSEL1_STATUS;
             break;
         }
         case APP_VOLTAGE_20000mV:
         {
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
-            UPDPIO_DriveHigh(u8PortNum, eUPD_PIO9);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+            //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO9);
+            PORT_PinClear(PORT_PIN_PA04);
+            PORT_PinClear(PORT_PIN_PA03);
+            PORT_PinSet(PORT_PIN_PA02);
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_VSEL2_STATUS;
             break;
@@ -545,9 +564,12 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
         /*Intentionally break is left*/
         case APP_VOLTAGE_0mV:
         {
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO7);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO9);
+            PORT_PinClear(PORT_PIN_PA04);
+            PORT_PinClear(PORT_PIN_PA03);
+            PORT_PinClear(PORT_PIN_PA02);
             break;
         }
     }
