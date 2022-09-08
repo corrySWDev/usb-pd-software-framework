@@ -493,6 +493,10 @@ UINT8 App_PortPowerInit(UINT8 u8PortNum)
     PORT_PinGPIOConfig(PORT_PIN_PA02);           
     PORT_PinClear(PORT_PIN_PA02);
     PORT_PinOutputEnable(PORT_PIN_PA02);   
+    /* HV_EVENT Init */
+    PORT_PinGPIOConfig(PORT_PIN_PA05);           
+    PORT_PinClear(PORT_PIN_PA05);
+    PORT_PinOutputEnable(PORT_PIN_PA05); 
  
     return u8Return; 
 }
@@ -522,6 +526,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
             PORT_PinClear(PORT_PIN_PA04);
             PORT_PinClear(PORT_PIN_PA03);
             PORT_PinClear(PORT_PIN_PA02);
+            PORT_PinClear(PORT_PIN_PA05);
             break;
         }
         case APP_VOLTAGE_9000mV:
@@ -532,6 +537,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
             PORT_PinSet(PORT_PIN_PA04);
             PORT_PinClear(PORT_PIN_PA03);
             PORT_PinClear(PORT_PIN_PA02);
+            PORT_PinSet(PORT_PIN_PA05);
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_VSEL0_STATUS;
             break;
@@ -544,6 +550,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
             PORT_PinClear(PORT_PIN_PA04);
             PORT_PinSet(PORT_PIN_PA03);
             PORT_PinClear(PORT_PIN_PA02);
+            PORT_PinSet(PORT_PIN_PA05);
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_VSEL1_STATUS;
             break;
@@ -556,6 +563,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
             PORT_PinClear(PORT_PIN_PA04);
             PORT_PinClear(PORT_PIN_PA03);
             PORT_PinSet(PORT_PIN_PA02);
+            PORT_PinSet(PORT_PIN_PA05);
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_VSEL2_STATUS;
             break;
@@ -570,6 +578,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
             PORT_PinClear(PORT_PIN_PA04);
             PORT_PinClear(PORT_PIN_PA03);
             PORT_PinClear(PORT_PIN_PA02);
+            PORT_PinClear(PORT_PIN_PA05);
             break;
         }
     }
