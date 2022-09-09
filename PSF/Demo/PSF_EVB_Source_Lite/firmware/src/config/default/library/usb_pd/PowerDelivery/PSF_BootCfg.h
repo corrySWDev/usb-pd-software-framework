@@ -68,7 +68,7 @@ Power Data State for FRS (Bit 12:11) 0 - FRS Disabled for Port, 1 - FRS only in 
 /********************************PIO Specific configuration******************************/
 #define CFG_PORT_0_UPD_FAULT_IN_PIO_NO       eUPD_PIO5
 #define CFG_PORT_0_UPD_FAULT_IN_MODE         eINPUT_ACTIVE_LOW
-#define CFG_PORT_0_UPD_EN_VBUS               eUPD_PIO3
+#define CFG_PORT_0_UPD_EN_VBUS               eUPD_PIO2
 #define CFG_PORT_0_UPD_EN_VBUS_PIO_MODE      ePUSH_PULL_ACTIVE_HIGH
 
 
