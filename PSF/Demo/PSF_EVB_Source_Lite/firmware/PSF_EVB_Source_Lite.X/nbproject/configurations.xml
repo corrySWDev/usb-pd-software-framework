@@ -372,7 +372,7 @@
         <targetDevice>ATSAMD20E16</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>nEdbgTool</platformTool>
+        <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>4.10</languageToolchainVersion>
         <platform>3</platform>
@@ -1106,6 +1106,8 @@
         <property key="memories.programmemory.ranges" value="0x400000-0x5fffff"/>
         <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/Users/I19150/Documents/Phase2and4/PSF/Demo/PSF_EVB_Source_Lite/firmware/PSF_EVB_Source_Lite.X/debug/default/PSF_EVB_Source_Lite_ptg"/>
         <property key="programoptions.eraseb4program" value="false"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -1126,8 +1128,8 @@
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="communication.activationmode" value="nohv"/>
         <property key="communication.interface" value="swd"/>
-        <property key="communication.speed" value="2.000"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="communication.speed" value="4.000"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
         <property key="firmware.update.action" value="firmware.update.use.latest"/>
@@ -1143,17 +1145,17 @@
         <property key="memories.instruction.ram.ranges"
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
-        <property key="memories.programmemory.ranges" value="0-ffff"/>
+        <property key="memories.programmemory.ranges" value="0x400000-0x5fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmerToGoFilePath"
                   value="C:/Users/I19150/Documents/Phase2and4/PSF/Demo/PSF_EVB_Source_Lite/firmware/PSF_EVB_Source_Lite.X/debug/default/PSF_EVB_Source_Lite_ptg"/>
-        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.eraseb4program" value="false"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
                   value="${memories.dataflash.default}"/>
         <property key="programoptions.preserveeeprom" value="false"/>
         <property key="programoptions.preserveeeprom.ranges" value=""/>
-        <property key="programoptions.preserveprogram.ranges" value="0-20001fff"/>
+        <property key="programoptions.preserveprogram.ranges" value=""/>
         <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveuserid" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
