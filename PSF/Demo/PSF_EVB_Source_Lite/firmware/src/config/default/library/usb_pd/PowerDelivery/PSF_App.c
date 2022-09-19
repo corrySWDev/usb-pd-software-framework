@@ -210,7 +210,7 @@ UINT8 App_HandlePSFEvents(UINT8 u8PortNum, eMCHP_PSF_NOTIFICATION ePDEvent)
 
 void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFunc)
 {
-    UINT16 u16Delay;
+//    UINT16 u16Delay;
     switch(eGPIOFunc)
     {
         case eUPD350_ALERT_FUNC:
@@ -243,6 +243,9 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
                initialization here. 
                It is configured in input mode, since configuring it in output 
                mode and driving it high always would increase current consumption. */
+            PORT_PinGPIOConfig(PORT_PIN_PA00);           
+            PORT_PinSet(PORT_PIN_PA00);
+            PORT_PinOutputEnable(PORT_PIN_PA00);
             break;
         }
 		
@@ -250,8 +253,11 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
         {
             if (PORT0 == u8PortNum)
             {
-                SPI_SS_0_Set();
-                SPI_SS_0_OutputEnable();
+                //SPI_SS_0_Set();
+                //SPI_SS_0_OutputEnable();
+                PORT_PinGPIOConfig(PORT_PIN_PA10);           
+                PORT_PinSet(PORT_PIN_PA10);
+                PORT_PinOutputEnable(PORT_PIN_PA10);
             }
             else if(PORT1 == u8PortNum)
             {
@@ -267,23 +273,23 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
 		
         case eVBUS_DIS_FUNC:
         {
-            UPDPIO_SetBufferType(u8PortNum, eUPD_PIO4, UPD_PIO_SETBUF_PUSHPULL);
-            UPDPIO_DriveLow(u8PortNum, eUPD_PIO4);
-            UPDPIO_EnableOutput(u8PortNum, eUPD_PIO4);
+            //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO4, UPD_PIO_SETBUF_PUSHPULL);
+            //UPDPIO_DriveLow(u8PortNum, eUPD_PIO4);
+            //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO4);
             break; 
         }
 		
         case eDC_DC_EN_FUNC:
         {
-            UPDPIO_SetBufferType(u8PortNum, eUPD_PIO6, UPD_PIO_SETBUF_PUSHPULL);            
-            UPDPIO_DriveHigh(u8PortNum, eUPD_PIO6);
-            UPDPIO_EnableOutput(u8PortNum, eUPD_PIO6);
+            //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO6, UPD_PIO_SETBUF_PUSHPULL);            
+            //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO6);
+            //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO6);
             
              /* Delay for the DC/DC module to stabilize after Initialization */
-            for(u16Delay = 0; u16Delay < 20000; u16Delay++)
-            {
-                __NOP();
-            }   
+            //for(u16Delay = 0; u16Delay < 20000; u16Delay++)
+            //{
+            //    __NOP();
+            //}   
             /* Update Port IO Status */
             gasCfgStatusData.sPerPortData[u8PortNum].u32PortIOStatus |= DPM_PORT_IO_EN_DC_DC_STATUS;
             break; 
@@ -366,7 +372,8 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
                 /* Drive low the CS to enable the communication*/
                 if (PORT0 == u8PortNum)
                 {
-                    SPI_SS_0_Clear();
+                    //SPI_SS_0_Clear();           
+                    PORT_PinClear(PORT_PIN_PA10);
                 }
                 else if(PORT1 == u8PortNum)
                 {
@@ -382,7 +389,8 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
                 /* Drive high the CS to disable the communication for the port*/
                 if (PORT0 == u8PortNum)
                 {
-                    SPI_SS_0_Set();
+                    //SPI_SS_0_Set();
+                    PORT_PinSet(PORT_PIN_PA10);
                 }
                 else if(PORT1 == u8PortNum)
                 {  
@@ -400,11 +408,11 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
         {
             if (eGPIO_ASSERT == eGPIODrive)
             {
-                UPDPIO_DriveHigh(u8PortNum, eUPD_PIO4);
+                //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO4);
             }
             else
             {
-                UPDPIO_DriveLow(u8PortNum, eUPD_PIO4);
+                //UPDPIO_DriveLow(u8PortNum, eUPD_PIO4);
             }
             break; 
         }
@@ -413,11 +421,11 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
         {
             if (eGPIO_ASSERT == eGPIODrive)
             {
-                UPDPIO_DriveHigh(u8PortNum, eUPD_PIO6);
+                //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO6);
 			}
             else
             {
-                UPDPIO_DriveLow(u8PortNum, eUPD_PIO6);
+                //UPDPIO_DriveLow(u8PortNum, eUPD_PIO6);
 
             }
             break;
