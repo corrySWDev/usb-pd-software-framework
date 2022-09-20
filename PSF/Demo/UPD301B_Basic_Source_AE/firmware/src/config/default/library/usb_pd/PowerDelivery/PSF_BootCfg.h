@@ -34,19 +34,19 @@ HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define _PSF_BOOTCFG_H
 
 /*********************************Common Configuration*****************************************/
-#define CFG_PRODUCT_ID              0x350U
-#define CFG_VENDOR_ID               0x424U
-#define CFG_HW_VERSION              0x0U
+#define CFG_PRODUCT_ID              0x1234U
+#define CFG_VENDOR_ID               0x451U
+#define CFG_HW_VERSION              0x5U
 #define CFG_SILICON_VERSION         0x0U
 
 /*Length of Manufacturer string should be within the range of 0 to 21.
  Default length of Manufacturer string is 20*/
-#define CFG_MANUFACTURER_STR_LEN    20U
+#define CFG_MANUFACTURER_STR_LEN    18U
 
 /*Number of characters in Manufacturer string should be less than or equal to
  the value in CFG_MANUFACTURER_STR_LEN. Default manufacturer string is 
  "Microchip Technology" */
-#define CFG_MANUFACTURER_STR        "Microchip Technology"
+#define CFG_MANUFACTURER_STR        "Ramsey Electronics"
 
 /***********************************Port Specific configuration***********************/    
 
@@ -68,7 +68,7 @@ Power Data State for FRS (Bit 12:11) 0 - FRS Disabled for Port, 1 - FRS only in 
 /********************************PIO Specific configuration******************************/
 #define CFG_PORT_0_UPD_FAULT_IN_PIO_NO       eUPD_PIO9
 #define CFG_PORT_0_UPD_FAULT_IN_MODE         eINPUT_ACTIVE_LOW
-#define CFG_PORT_0_UPD_EN_VBUS               eUPD_PIO3
+#define CFG_PORT_0_UPD_EN_VBUS               eUPD_PIO2
 #define CFG_PORT_0_UPD_EN_VBUS_PIO_MODE      ePUSH_PULL_ACTIVE_HIGH
 
 

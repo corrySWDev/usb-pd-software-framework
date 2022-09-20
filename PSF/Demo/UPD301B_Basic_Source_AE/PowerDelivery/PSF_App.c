@@ -284,7 +284,11 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
                PORT_Initialize() by harmony. User can also choose to do the 
                initialization here. 
                It is configured in input mode, since configuring it in output 
-               mode and driving it high always would increase current consumption. */                        
+               mode and driving it high always would increase current consumption. */ 
+            PORT_PinGPIOConfig(PORT_PIN_PA00);           
+            PORT_PinSet(PORT_PIN_PA00);
+            PORT_PinOutputEnable(PORT_PIN_PA00);
+
             break;
         }
         case eSPI_CHIP_SELECT_FUNC:
@@ -304,9 +308,9 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
         {
             if (PORT0 == u8PortNum)
             {
-                UPDPIO_SetBufferType(u8PortNum, eUPD_PIO8, UPD_PIO_SETBUF_PUSHPULL);
-                UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
-                UPDPIO_EnableOutput(u8PortNum, eUPD_PIO8);
+                //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO8, UPD_PIO_SETBUF_PUSHPULL);
+                //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+                //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO8);
             }
             else
             {
@@ -318,9 +322,9 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
         {
             if (PORT0 == u8PortNum)
             {
-                UPDPIO_SetBufferType(u8PortNum, eUPD_PIO2, UPD_PIO_SETBUF_PUSHPULL);            
-                UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
-                UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
+                //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO2, UPD_PIO_SETBUF_PUSHPULL);            
+                //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
+                //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
             }
             else
             {
@@ -438,7 +442,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    UPDPIO_DriveHigh(u8PortNum, eUPD_PIO8);
+                    //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO8);
                 }
                 else
                 {
@@ -449,7 +453,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
+                    //UPDPIO_DriveLow(u8PortNum, eUPD_PIO8);
                 }
                
                 else
@@ -465,7 +469,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
+                    //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
                 }
                 
                 else
@@ -477,7 +481,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    UPDPIO_DriveLow(u8PortNum, eUPD_PIO2);
+                    //UPDPIO_DriveLow(u8PortNum, eUPD_PIO2);
                 }
                
                 else
@@ -572,6 +576,19 @@ UINT8 App_PortPowerInit(UINT8 u8PortNum)
         /* Do Nothing */
     }
    
+    /* HV_EVENT Init */
+    if (PORT0 == u8PortNum)
+    {
+        PORT_PinGPIOConfig(PORT_PIN_PA05);           
+        PORT_PinWrite(PORT_PIN_PA05, FALSE);
+        PORT_PinOutputEnable(PORT_PIN_PA05); 
+    }
+    
+    else
+    {
+        /* Do Nothing */
+    }
+    
     u8Return = TRUE;  
     
     return u8Return; 
@@ -600,6 +617,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
                 PORT_PinWrite(PORT_PIN_PA04, FALSE);
                 PORT_PinWrite(PORT_PIN_PA03, FALSE);
                 PORT_PinWrite(PORT_PIN_PA02, FALSE);
+                PORT_PinWrite(PORT_PIN_PA05, FALSE);
             }
             
             else
@@ -615,6 +633,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
                 PORT_PinWrite(PORT_PIN_PA04, TRUE);
                 PORT_PinWrite(PORT_PIN_PA03, FALSE);
                 PORT_PinWrite(PORT_PIN_PA02, FALSE);
+                PORT_PinWrite(PORT_PIN_PA05, TRUE);
             }
             
             else
@@ -633,6 +652,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
                 PORT_PinWrite(PORT_PIN_PA04, FALSE);
                 PORT_PinWrite(PORT_PIN_PA03, TRUE);
                 PORT_PinWrite(PORT_PIN_PA02, FALSE);
+                PORT_PinWrite(PORT_PIN_PA05, TRUE);
             }
             
             else
@@ -651,6 +671,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
                 PORT_PinWrite(PORT_PIN_PA04, FALSE);
                 PORT_PinWrite(PORT_PIN_PA03, FALSE);
                 PORT_PinWrite(PORT_PIN_PA02, TRUE);
+                PORT_PinWrite(PORT_PIN_PA05, TRUE);
             }
           
             else
@@ -671,6 +692,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
                 PORT_PinWrite(PORT_PIN_PA04, FALSE);
                 PORT_PinWrite(PORT_PIN_PA03, FALSE);
                 PORT_PinWrite(PORT_PIN_PA02, FALSE);
+                PORT_PinWrite(PORT_PIN_PA05, FALSE);
             }
            
             else
