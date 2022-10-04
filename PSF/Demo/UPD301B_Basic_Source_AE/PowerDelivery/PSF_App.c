@@ -97,7 +97,8 @@ UINT8 App_HandlePSFEvents(UINT8 u8PortNum, eMCHP_PSF_NOTIFICATION ePDEvent)
 #if (TRUE == INCLUDE_POWER_MANAGEMENT_CTRL)
 			App_SetMCUIdle();
 #endif
-			break;
+			__asm volatile("nop");
+            break;
 		}   
         case eMCHP_PSF_VCONN_PWR_FAULT:
         {
@@ -115,30 +116,36 @@ UINT8 App_HandlePSFEvents(UINT8 u8PortNum, eMCHP_PSF_NOTIFICATION ePDEvent)
         
         case eMCHP_PSF_PORT_POWERED_OFF:
         {
+            __asm volatile("nop");
             break;
         }
         
         case eMCHP_PSF_TYPEC_DETACH_EVENT:
         {
+            __asm volatile("nop");
             break;
         }
         case eMCHP_PSF_TYPEC_CC1_ATTACH:
         {
+            __asm volatile("nop");
             break;
         }
         case eMCHP_PSF_TYPEC_CC2_ATTACH:
         {
+            __asm volatile("nop");
             break;
         }
         case eMCHP_PSF_TYPEC_ERROR_RECOVERY: 
         {
 			/*Returning TRUE to enable PSF to handle Error Recovery*/
+            __asm volatile("nop");
             u8RetVal = TRUE;
             break; 
         }
         
         case eMCHP_PSF_PD_CONTRACT_NEGOTIATED: 
         {
+            __asm volatile("nop");
             break; 
         }
         
@@ -149,6 +156,7 @@ UINT8 App_HandlePSFEvents(UINT8 u8PortNum, eMCHP_PSF_NOTIFICATION ePDEvent)
         
         case eMCHP_PSF_HARD_RESET_COMPLETE:
         {
+            __asm volatile("nop");
             break; 
         }
         
@@ -233,16 +241,19 @@ UINT8 App_HandlePSFEvents(UINT8 u8PortNum, eMCHP_PSF_NOTIFICATION ePDEvent)
         
 		case eMCHP_PSF_PORT_DISABLED:
         {
+            __asm volatile("nop");
             break;
         }
         
         case eMCHP_PSF_PORT_ENABLED:
         {
+            __asm volatile("nop");
             break; 
         }
         
         default:
         {
+            __asm volatile("nop");
             break;
         }
     }
@@ -386,6 +397,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             /* UPD350 Reset pin is configured in input mode, since configuring
                it in output mode and driving it high always would increase 
                current consumption */
+            
             if (eGPIO_ASSERT == eGPIODrive)
             {
                 /*UPD350 Reset is active low signal*/
@@ -398,7 +410,6 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
                 {
                     __asm volatile("nop");
                     __asm volatile("nop");
-
                 }                                
             }
             else

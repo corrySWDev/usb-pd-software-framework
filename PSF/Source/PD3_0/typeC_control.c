@@ -1522,7 +1522,8 @@ void TypeC_RunStateMachine (UINT8 u8PortNum)
                 /*In this SubState, VBUS and VCONN are disabled.Pull down and Pull up resistors
                 are set to open disconnect*/
                 case TYPEC_ERROR_RECOVERY_ENTRY_SS:
-                {                  
+                {      
+                    NVIC_SystemReset();
                     DEBUG_PRINT_PORT_STR (PSF_PROTOCOL_TYPEC_LAYER_DEBUG_MSG,u8PortNum,"TYPEC_ERROR_RECOVERY_ENTRY_SS\r\n"); 
                     
                     /* Disable the receiver*/
@@ -1611,26 +1612,26 @@ void TypeC_RunStateMachine (UINT8 u8PortNum)
                 
                 case TYPEC_ERROR_RECOVERY_WAIT_FOR_VBUS_OFF_SS:
                 {
-                    if (TYPEC_VBUS_0V_PRES == (u8IntStsISR & TYPEC_VBUS_PRESENCE_MASK))
-                    {                  
-                        /* Turn off VBUS Discharge */
-                        PWRCTRL_ConfigVBUSDischarge (u8PortNum, FALSE);                        
-                        
-                        /*Setting VBUS Comparator OFF once the VBUS line goes off to 0V*/
-                        TypeC_SetVBUSCompONOFF (u8PortNum, TYPEC_VBUSCOMP_OFF);
-                        
+                 //   if (TYPEC_VBUS_0V_PRES == (u8IntStsISR & TYPEC_VBUS_PRESENCE_MASK))
+                 //   {                  
+                 //       /* Turn off VBUS Discharge */
+                 //       PWRCTRL_ConfigVBUSDischarge (u8PortNum, FALSE);                        
+                 //       
+                 //       /*Setting VBUS Comparator OFF once the VBUS line goes off to 0V*/
+                 //       TypeC_SetVBUSCompONOFF (u8PortNum, TYPEC_VBUSCOMP_OFF);
+                 //       
                         gasTypeCcontrol[u8PortNum].u8TypeCTimerID = PDTimer_Start ( \
                                   (TYPEC_ERRORRECOVERY_TIMEOUT_MS),\
                                   TypeC_SubStateChange_TimerCB, u8PortNum,\
                                   TYPEC_ERROR_RECOVERY_TIMEOUT_SS);
                         
                         gasTypeCcontrol[u8PortNum].u8TypeCSubState = TYPEC_ERROR_RECOVERY_IDLE_SS;                    
-                    }
-                    else
-                    {
+                 //   }
+                 //   else
+                 //   {
                         /* Hook to notify Type C state machine entry into idle sub-state */
                         MCHP_PSF_HOOK_NOTIFY_IDLE (u8PortNum, eIDLE_TYPEC_NOTIFY);                        
-                    }                    
+                 //   }                    
                     break;
                 }
 
