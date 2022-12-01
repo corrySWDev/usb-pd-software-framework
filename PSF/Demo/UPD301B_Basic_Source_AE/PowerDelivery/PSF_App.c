@@ -333,9 +333,9 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
         {
             if (PORT0 == u8PortNum)
             {
-                //UPDPIO_SetBufferType(u8PortNum, eUPD_PIO2, UPD_PIO_SETBUF_PUSHPULL);            
-                //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
-                //UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
+                UPDPIO_SetBufferType(u8PortNum, eUPD_PIO2, UPD_PIO_SETBUF_PUSHPULL);            
+                UPDPIO_DriveLow(u8PortNum, eUPD_PIO2); // disable DC/DC at init
+                UPDPIO_EnableOutput(u8PortNum, eUPD_PIO2);
             }
             else
             {
@@ -354,7 +354,7 @@ void App_GPIOControl_Init(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFun
         {
             if (PORT0 == u8PortNum)
             {
-                PORT_PinWrite(PORT_PIN_PA28, TRUE);
+                PORT_PinWrite(PORT_PIN_PA28, FALSE);
                 PORT_PinOutputEnable(PORT_PIN_PA28);
             }
             else
@@ -480,7 +480,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    //UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
+                    UPDPIO_DriveHigh(u8PortNum, eUPD_PIO2);
                 }
                 
                 else
@@ -492,7 +492,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    //UPDPIO_DriveLow(u8PortNum, eUPD_PIO2);
+                    UPDPIO_DriveLow(u8PortNum, eUPD_PIO2);
                 }
                
                 else
@@ -508,7 +508,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    PORT_PinWrite(PORT_PIN_PA28, TRUE);
+                    PORT_PinWrite(PORT_PIN_PA28, FALSE);
                     PORT_PinOutputEnable(PORT_PIN_PA28);
                 }
                
@@ -521,7 +521,7 @@ void App_GPIOControl_Drive(UINT8 u8PortNum, eMCHP_PSF_GPIO_FUNCTIONALITY eGPIOFu
             {
                 if (PORT0 == u8PortNum)
                 {
-                    PORT_PinWrite(PORT_PIN_PA28, FALSE);
+                    PORT_PinWrite(PORT_PIN_PA28, TRUE);
                     PORT_PinOutputEnable(PORT_PIN_PA28);
                 }
                 
@@ -704,6 +704,7 @@ void App_PortPowerSetPower(UINT8 u8PortNum, UINT16 u16Voltage, UINT16 u16Current
                 PORT_PinWrite(PORT_PIN_PA03, FALSE);
                 PORT_PinWrite(PORT_PIN_PA02, FALSE);
                 PORT_PinWrite(PORT_PIN_PA05, FALSE);
+                UPDPIO_DriveLow(u8PortNum, eUPD_PIO2);
             }
            
             else
